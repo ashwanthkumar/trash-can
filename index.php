@@ -4,13 +4,12 @@
 	require_once("lib/limonade.php");
 	require_once("functions.php");
 
-	function hello() {
-		$db	= $GLOBALS['db'];
-		$results = $db->select("users");
-		echo count($results);
-		return json(array("resp" => "data"));
-	}
+	dispatch_post("/user/add", 'addUser');
+	dispatch_post("/trash/add", 'addTrash');
+	dispatch_post("/trash/:trash_id/start_clean", "start_cleaning");
+	dispatch_post("/trash/:clean_id/stop_clean", "complete_cleaning");
 
-	dispatch("/", 'hello');
+	dispatch("/trash/:user_id", 'listTrashForUser');
+	dispatch("/trash/:trash_id", "getTrashDetails");
 
 	run();
