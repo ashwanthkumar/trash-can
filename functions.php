@@ -33,7 +33,7 @@ function addTrash() {
 
 	// TODO: Handle Images that are being uploaded
 	$picture = $_POST['picture'];
-	
+	$user_id = $_POST['user_id'];
 
 	$uploaddir = '/var/www/trash_can/trash_images/';
 	$uploadFileName = "/info_" . basename($_FILES['userfile']['name']);
@@ -46,7 +46,8 @@ function addTrash() {
 			"base_bounty" => $base_bounty,
 			"message" => $message,
 			"picture" => image_url($uploadFileName),
-			"state" => 0
+			"state" => 0,
+			"user_id" => $user_id
 		);
 		return json(array("status" => "true"));
 	} else {
